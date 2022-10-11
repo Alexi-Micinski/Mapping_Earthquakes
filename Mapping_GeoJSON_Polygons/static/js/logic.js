@@ -93,26 +93,27 @@ let map = L.map("mapid", {
 // Accessing the Toronto neighborhoods GeoJSON URL.
 let torontoHoods = "https://raw.githubusercontent.com/Alexi-Micinski/Mapping_Earthquakes/main/torontoNeighborhoods.json";
 
-// // Create a style for the lines.
-// let myStyle = {
-//     color: "#ffffa1",
-//     weight: 2
-// }
+// Create a style for the lines.
+let myStyle = {
+    color: "blue",
+    weight: 1,
+    fillColor: "yellow"
+}
 
-// // Grabbing our GeoJSON data.
-// d3.json(torontoData).then(function(data) {
-//     console.log(data);
-//     // Creating a GeoJSON layer with the retrieved data.
-//     L.geoJSON(data, {
-//         style: myStyle,
-//         onEachFeature: function(feature, layer) {
-//             layer.bindPopup("<h3> Airline: " + feature.properties.airline + "</h3> <hr><h3> Destination: " + feature.properties.dst + "</h3>");
-//         }
-//     }).addTo(map);
-// });
-
+// Grabbing our GeoJSON data.
 d3.json(torontoHoods).then(function(data) {
     console.log(data);
     // Creating a GeoJSON layer with the retrieved data.
-    L.geoJSON(data).addTo(map);
+    L.geoJSON(data, {
+        style: myStyle,
+        onEachFeature: function(feature, layer) {
+            layer.bindPopup("<h3> Neighborhood: " + feature.properties.AREA_NAME);
+        }
+    }).addTo(map);
 });
+
+// d3.json(torontoHoods).then(function(data) {
+//     console.log(data);
+//     // Creating a GeoJSON layer with the retrieved data.
+//     L.geoJSON(data).addTo(map);
+// });
